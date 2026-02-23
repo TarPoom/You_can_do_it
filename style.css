@@ -77,49 +77,35 @@
   font-size: 0.9rem;
 }
 
+/* ... keep all your existing code at the top ... */
+
 .words.line4 {
-  top: 50%;
+  top: 55%; /* Adjusted slightly for space */
+  font-size: 1.1rem;
   text-align: center;
-  font-size: 0.9rem;
 }
 
+/* ADD THESE NEW LINES TO YOUR CSS */
 .words.line5 {
-  top: 65%;
+  top: 70%;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
 }
 
 .words.line6 {
-  top: 80%;
+  top: 85%;
   text-align: center;
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 1.1rem;
 }
 
-.open .flap {
-  transform: rotateX(180deg);
-  transition: transform 0.4s ease, z-index 0.6s;
-  z-index: 1;
-}
-
-.close .flap {
-  transform: rotateX(0deg);
-  transition: transform 0.4s 0.6s ease, z-index 1s;
-  z-index: 5;
-}
-
-.close .letter {
-  transform: translateY(0px);
-  transition: transform 0.4s ease, z-index 1s;
-  z-index: 1;
-}
-
-/* Moves the letter higher to show the full message */
+/* MOVE THE LETTER HIGHER SO SHE CAN READ THE BOTTOM */
 .open .letter {
-  transform: translateY(-130px);
+  transform: translateY(-130px); /* Changed from -100px */
   transition: transform 0.4s 0.6s ease, z-index 0.6s;
   z-index: 2;
 }
+
+/* REMOVE THAT LAST EXTRA } THAT IS CURRENTLY AT THE BOTTOM OF YOUR FILE */
 
 .hearts {
   position: absolute;
@@ -229,3 +215,4 @@ body {
   background-color: #d9534f;
   color: #fff;
 }
+
