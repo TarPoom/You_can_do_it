@@ -1,46 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Love letter for crush</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
-      rel="stylesheet" />
-    <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body>
-    <!-- tiktok meowish -->
-    <div class="envlope-wrapper">
-      <div id="envelope" class="close">
-        <div class="front flap"></div>
-        <div class="front pocket"></div>
-        <div class="letter">
-          <div class="words line1">To: Bammy</div>
-          <div class="words line2">Dear Bammy, you khow i love u so much</div>
-          <div class="words line3">That every time i see you</div>
-          <div class="words line4">my world stops</div>
-          <div class="words line5">You can do it everything you can</div>
-          <div class="words line6">love you,</div>
-        </div>
-        <div class="hearts">
-          <div class="heart a1"></div>
-          <div class="heart a2"></div>
-          <div class="heart a3"></div>
-        </div>
-      </div>
-    </div>
-    <div class="reset">
-      <button id="open">Open</button>
-      <button id="reset">Close</button>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Bammy - Super Love Edition 💖</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: radial-gradient(circle, #ffafbd, #ffc3a0);
+            font-family: 'Tahoma', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 50px rgba(255, 75, 43, 0.3);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            border: 3px solid #fff;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff4b2b;
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        p {
+            color: #444;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .heart-btn {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 75, 43, 0.4);
+            margin-top: 20px;
+        }
+
+        .heart-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* สไตล์ของหัวใจที่กระจายตัว */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 50;
+            user-select: none;
+            will-change: transform;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        }
+
+        /* หัวใจลอยพื้นหลังปกติ */
+        .bg-heart {
+            position: absolute;
+            bottom: -50px;
+            opacity: 0.6;
+            animation: floatUp 5s linear forwards;
+        }
+
+        @keyframes floatUp {
+            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>รักนะ "แบมมี่" 🥰</h1>
+        <p>คนเก่งของเค้า... สู้ๆ นะครับ!<br>
+        กดปุ่มรับกำลังใจแบบเบิ้มๆ ไปเลย!</p>
+        <button class="heart-btn" onclick="burstHearts(event)">กดแรงๆ เลย! ❤️</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="script.js"></script>
-  </body>
+    <script>
+        const heartEmojis = ['❤️', '💖', '💗', '💓', '💝', '✨', '🥰'];
+
+        function burstHearts(e) {
+            // จำนวนหัวใจที่ออกมาต่อการกด 1 ครั้ง (ปรับเพิ่มได้ตรงนี้)
+            const count = 50; 
+            
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // สุ่มไอคอนหัวใจ
+                particle.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                
+                // กำหนดตำแหน่งเริ่มต้นที่ปุ่ม
+                const x = e.clientX;
+                const y = e.clientY;
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                
+                // สุ่มทิศทางการกระจาย (360 องศา)
+                const destX = (Math.random() - 0.5) * 600; // กระจายซ้ายขวา
+                const destY = (Math.random() - 0.5) * 600; // กระจายบนล่าง
+                
+                particle.style.setProperty('--x', `${destX}px`);
+                particle.style.setProperty('--y', `${destY}px`);
+                particle.style.fontSize = Math.random() * (40 - 20) + 20 + 'px';
+                
+                // ใส่ Animation
+                particle.style.animation = `explode ${Math.random() * 1 + 0.5}s cubic-bezier(0.1, 0.8, 0.3, 1) forwards`;
+
+                document.body.appendChild(particle);
+
+                // ลบออกเมื่อจบ animation
+                setTimeout(() => {
+                    particle.remove();
+                }, 1500);
+            }
+        }
+
+        // หัวใจลอยหลังพื้นหลัง (สุ่มขึ้นมาเรื่อยๆ)
+        setInterval(() => {
+            const bgHeart = document.createElement('div');
+            bgHeart.className = 'bg-heart';
+            bgHeart.innerHTML = '💗';
+            bgHeart.style.left = Math.random() * 100 + 'vw';
+            bgHeart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            bgHeart.style.duration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(bgHeart);
+            setTimeout(() => bgHeart.remove(), 5000);
+        }, 300);
+    </script>
+</body>
 </html>
-
-
-
-
